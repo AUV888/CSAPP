@@ -6,7 +6,7 @@
  */
 int mul3div4(int x)
 {
-    int sign = x >> 31;
+    int sign = x >> 31; // arithmetic right shift
     int quarter = (x + (~sign & 3)) >> 2;
     return x - quarter; // round to zero
 }

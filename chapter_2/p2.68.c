@@ -2,7 +2,7 @@
 
 int lower_one_mask(int n)
 {
-    /*
+    // More robust method
     int res = 1 << (n - 1);
     res |= res >> 1;
     res |= res >> 2;
@@ -10,9 +10,11 @@ int lower_one_mask(int n)
     res |= res >> 8;
     res |= res >> 16;
     return res;
-    */
 
+    // UB when n = 32
+    /*
     return (2 << (n - 1)) - 1;
+    */
 }
 
 int main()

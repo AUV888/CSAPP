@@ -2,9 +2,9 @@
 
 unsigned replace_byte(unsigned x, int i, unsigned char b)
 {
-    int mov = i << 3;
-    x = x & ~(0xFF << mov);
-    x = x | ((int)b << mov);
+    int mov = i << 3;        // bit = byte * 8
+    x = x & ~(0xFF << mov);  // clear the area to be replaced
+    x = x | ((int)b << mov); // replace the byte
     return x;
 }
 

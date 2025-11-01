@@ -1,0 +1,20 @@
+sum_col:
+	leaq 1(, %rdi, 4), %r8      # r8 = 4n+1
+	leaq (%rdi, %rdi, 2), %rax  # rax = 3n
+	movq %rax, %rdi             # rdi = 3n
+	testq %rax, %rax            # n <= 0, goto L4
+	jle .L4
+	salq $3, %r8                # r8 = 8*(4n+1)
+	leaq (%rsi, %rdx, 8), %rcx  # rcx = A+8j, rcx is &A[0][j]
+	movl $0, %eax               # result = 0
+	movl $0, %edx               # i = 0
+.L3:
+	addq (%rcx), %rax           # result += A[i][j]
+	addq $1, %rdx               # i++
+	addq %r8, %rcx              # rcx += 4n+1
+	cmpq %rdi, %rdx             # if j != 3n, goto L3
+	jne .L3
+	rep; ret
+.L4:
+	movl $0, %eax               # result = 0
+	ret
